@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.conf import settings
 import os
+from random import randint
 
 from . import util
 
@@ -90,6 +91,11 @@ def edit_view(request, entry_name):
         "entry_name": entry_name,
         "markdown_source": util.get_entry(entry_name)
     })
+
+def random(request):
+    entries_list = util.list_entries()
+    index = randint(0, len(entries_list) - 1)
+    return redirect('entry', entries_list[index])
 
 def entry_exists(query):
     return [entry for entry in util.list_entries() if query.lower() == entry.lower()]

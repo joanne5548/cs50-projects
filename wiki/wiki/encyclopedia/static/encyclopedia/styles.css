@@ -1,15 +1,21 @@
 body {
     margin: 0;
     background-color: white;
+    font-family: "Crimson+Text";
+    font-weight: 525;
+    font-size: 17px;
 }
 
 code {
     white-space: pre;
 }
 
-h1 {
+.all-pages-header {
     margin-top: 0px;
     padding-top: 20px;
+    padding-left: 15px;
+    padding-bottom: 8px;
+    font-weight: 550;
 }
 
 textarea {
@@ -18,24 +24,57 @@ textarea {
 }
 
 .main {
-    padding: 10px;
+    padding: 25px 35px 25px;
 }
 
 .search {
     width: 100%;
-    font-size: 15px;
+    padding: 2px 4px 2px;
+    border-style: solid;
+    border-radius: 1px;
+    border-width: 1px;
+    border-color: rgb(58, 58, 58);
+    font-size: 17px;
     line-height: 15px;
+}
+
+/* this doesn't work :( */
+.search:focus {
+    border-style: solid;
+    border-width: 0px;
+    border-color: rgb(58, 58, 58);
 }
 
 .sidebar {
     background-color: #f0f0f0;
     height: 100vh;
-    padding: 20px;
+    padding: 15px 20px 0px 34px;
 }
 
 .sidebar h2 {
+    text-align: center;
     margin-top: 5px;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 37px;
+}
+
+#sidebar-functionalities {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.sidebar form {
+    margin-bottom: 5px;
+}
+
+/* .main h1 {
+    margin-left: 15px;
+} */
+
+.main ul {
+    font-size: 19px;
 }
 
 .error-message-container {
@@ -49,4 +88,23 @@ textarea {
 #edit-page-link-container {
     text-align: right;
     margin-right: 20px;
+}
+
+.entry-page-container {
+    font-weight: 525;
+    margin-left: 0px;
+}
+
+.entry-page-container h1 {
+    font-weight: 550;
+    margin-left: 0px;
+    margin-bottom: 10px;
+}
+
+.entry-page-container p {
+    font-size: 19px;
+}
+
+.entry-page-container ul {
+    font-size: 19px;
 }

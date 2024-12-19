@@ -15,5 +15,7 @@
         <a href="{% url 'edit' entry_name %}">Edit Page</a>
     </div>
 
-    {{ html |safe }}
+    <div class="entry-page-container">
+        {{ html |safe }}
+    </div>
 {% endblock %}
