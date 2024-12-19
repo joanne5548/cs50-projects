@@ -1,0 +1,16 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ entry_name }}
+{% endblock %}
+
+{% block body %}
+    {% if error_message %}
+        <div class="error-message-container">
+            <h3>Error :&#40;</h3>
+            <h4 class="error-message">{{ error_message }}</h4>
+        </div>
+    {% endif %}
+
+    {{ html |safe }}
+{% endblock %}

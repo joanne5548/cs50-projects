@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Advanced Search</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/advanced_search.css">
+    </head>
+    <body>
+        <div class="top-container">
+            <img src="assets/google-logo.png" alt="google-logo">
+            <a class="google-search-button" href="index.html">Google Search</a>
+        </div>
+
+        <h1>Advanced Search</h1>
+
+        <form action="https://google.com/search">
+            <table class="custom-table">
+                <tbody>
+                    <tr>
+                        <td id="table-heading">Find pages with...</td>
+                    </tr>
+                    <tr>
+                        <td class="input-keyword">all these words:</td>
+                        <td class="input-box-container"><input type="text" name="as_q"></td>
+                    </tr>
+                    <tr>
+                        <td class="input-keyword">this exact word or phrase:</td>
+                        <td class="input-box-container"><input type="text" name="as_epq"></td>
+                    </tr>
+                    <tr>
+                        <td class="input-keyword">any of these words:</td>
+                        <td class="input-box-container"><input type="text" name="as_oq"></td>
+                    </tr>
+                    <tr>
+                        <td class="input-keyword">none of these words:</td>
+                        <td class="input-box-container"><input type="text" name="as_eq"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="search-button-container"><input class="search-button" type="submit" value="Advanced Search"></div>
+        </form>
+        <div id="certification">
+            Certified Joanne's Bootleg Google Search®
+        </div>
+    </body>
+</html>

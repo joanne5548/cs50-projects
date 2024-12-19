@@ -1,0 +1,101 @@
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  margin: 0;
+}
+
+.top-container {
+  display: flex;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  position: relative;
+}
+.top-container img {
+  width: 75px;
+}
+.top-container .google-search-button {
+  position: absolute;
+  right: 0;
+}
+
+h1 {
+  margin-left: 37px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  font-weight: 2;
+  font-size: 20px;
+  color: rgb(185, 0, 0);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(214, 214, 214);
+  border-right: none;
+  border-left: none;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  color: rgb(64, 64, 64);
+}
+
+.custom-table {
+  margin-left: 25px;
+  margin-right: 25px;
+  border-collapse: separate;
+  border-spacing: 15px;
+}
+.custom-table #table-heading {
+  font-size: 17px;
+}
+.custom-table td {
+  font-size: 13px;
+}
+.custom-table .input-keyword {
+  width: 175px;
+}
+.custom-table .input-box-container {
+  display: flex;
+  height: 28px;
+  width: 600px;
+}
+.custom-table input {
+  flex: 1 0 100%;
+  padding-left: 10px;
+  outline: none;
+  border-color: rgba(165, 165, 165, 0.616);
+  border-width: 1px;
+}
+.custom-table input:focus {
+  border-color: rgb(96, 143, 255);
+  box-shadow: 0px 2px 2px 0px rgba(141, 151, 157, 0.25) inset;
+}
+
+.search-button-container {
+  display: flex;
+}
+.search-button-container .search-button {
+  margin-left: 708px;
+  width: 120px;
+  height: 29px;
+  border-radius: 3px;
+  border-width: 1px;
+  border-color: rgb(77, 120, 221);
+  text-align: center;
+  font-size: 12px;
+  background-color: rgb(77, 129, 236);
+  color: white;
+  cursor: default;
+}
+
+#certification {
+  margin-top: 215px;
+  margin-right: 18px;
+  margin-bottom: 5px;
+  text-align: right;
+  font-size: 10px;
+  color: rgb(160, 160, 160);
+}
+
+/*# sourceMappingURL=advanced_search.css.map */

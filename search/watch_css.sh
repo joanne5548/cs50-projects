@@ -1,0 +1,1 @@
+sass.bat --watch css/index.scss:css/index.css css/image_search.scss:css/image_search.css css/advanced_search.scss:css/advanced_search.css
