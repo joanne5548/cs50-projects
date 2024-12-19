@@ -45,3 +45,8 @@ textarea {
 .error-message {
     margin-top: 20px;
 }
+
+#edit-page-link-container {
+    text-align: right;
+    margin-right: 20px;
+}

@@ -10,3 +10,10 @@
 ### Search
 - [x] Figure out a good way to make search case insensitive
 - [ ] Work on CSS
+
+### New Page
+- [ ] Work on CSS
+
+### Edit Page
+- [ ] Fix newline repducing bug ???
+- [ ] Work on CSS

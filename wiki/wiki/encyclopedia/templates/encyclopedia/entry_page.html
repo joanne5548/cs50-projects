@@ -11,6 +11,9 @@
             <h4 class="error-message">{{ error_message }}</h4>
         </div>
     {% endif %}
+    <div id="edit-page-link-container">
+        <a href="{% url 'edit' entry_name %}">Edit Page</a>
+    </div>
 
     {{ html |safe }}
 {% endblock %}

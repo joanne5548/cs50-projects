@@ -16,15 +16,6 @@ def index(request):
         "entries": util.list_entries()
     })
 
-def handle_search(request):
-    query = request.POST['q']
-    search_result = entry_exists(query)
-    
-    if search_result:
-        return redirect('entry', search_result[0])
-    
-    return redirect('results', query)
-
 def entry_view(request, entry_name):
     if request.method == "POST":
         if 'q' in request.POST:
@@ -79,12 +70,45 @@ def create_view(request):
             
     return render(request, "encyclopedia/create.html")
 
-def write_markdown(title, content):
-    html = f"# {title}\n\n" + content
-    file_directory = os.path.join(settings.BASE_DIR, "entries", f"{title}.md")
+def edit_view(request, entry_name):
+    if request.method == "POST":
+        if 'q' in request.POST:
+            return handle_search(request)
+        elif 'title' in request.POST:
+            title = request.POST['title']
+            if not title:
+                return render(request, "encyclopedia/edit.html", {
+                        "entry_name": entry_name,
+                        "markdown_source": util.get_entry(entry_name),
+                        "message": "Please enter the title of the page."
+                    })
+            print(request.POST['content'])
+            write_markdown(title, request.POST['content'], entry_name)
+            return redirect('entry', title)
 
-    with open(file_directory, "w") as new_page:
-        new_page.write(html)
+    return render(request, "encyclopedia/edit.html", {
+        "entry_name": entry_name,
+        "markdown_source": util.get_entry(entry_name)
+    })
 
 def entry_exists(query):
     return [entry for entry in util.list_entries() if query.lower() == entry.lower()]
+
+def handle_search(request):
+    query = request.POST['q']
+    search_result = entry_exists(query)
+    
+    if search_result:
+        return redirect('entry', search_result[0])
+    
+    return redirect('results', query)
+
+def write_markdown(title, content, old_name=None):
+    file_directory = os.path.join(settings.BASE_DIR, "entries", f"{title}.md")
+
+    if old_name: # When user edited the page
+        old_directory = os.path.join(settings.BASE_DIR, "entries", f"{old_name}.md")
+        os.rename(old_directory, file_directory)
+
+    with open(file_directory, "w") as new_page:
+        new_page.write(content)
