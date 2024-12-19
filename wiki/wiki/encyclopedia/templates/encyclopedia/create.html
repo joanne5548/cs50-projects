@@ -6,8 +6,13 @@
 
 {% block body %}
     {% if message %}
-        <h3>{{ message }}</h3>
+        {% if entry_name %}
+            <h3>{{ message }}<a href="{% url 'entry' entry_name %}">{{ entry_name }}</a></h3>
+        {% else %}
+            <h3>{{ message }}</h3>
+        {% endif %}
     {% endif %}
+
     <form method="POST">
         {% csrf_token %}
         <input type="text" id="create-page-title" name="title" placeholder="Title">

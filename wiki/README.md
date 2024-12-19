@@ -2,7 +2,7 @@
 
 ## To-Do
 ### General
-- [ ] Figure out a nice way to redirect urls
+- [x] Figure out a nice way to redirect urls
 
 ### Front Page
 - [ ] Touch up sidebar CSS
