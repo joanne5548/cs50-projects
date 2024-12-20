@@ -5,15 +5,20 @@
 - [x] Figure out a nice way to redirect urls
 
 ### Front Page
-- [ ] Touch up sidebar CSS
+- [x] Touch up sidebar CSS
 
 ### Search
 - [x] Figure out a good way to make search case insensitive
-- [ ] Work on CSS
+- [x] Work on CSS
+- [ ] Retrieve and display preview of entry page
 
 ### New Page
-- [ ] Work on CSS
+- [x] Work on CSS
+- [ ] (maybe) change the input fields from grid to table
 
 ### Edit Page
 - [ ] Fix newline repducing bug ???
-- [ ] Work on CSS
+- [x] Work on CSS
+
+### Some Ideas
+- [ ] Implement markdown preview

@@ -7,9 +7,11 @@
 {% block body %}
     <h1 class="all-pages-header">All Pages</h1>
 
-    <ul>
-        {% for entry in entries %}
-            <li><a href="{% url 'entry' entry %}">{{ entry }}</a></li>
-        {% endfor %}
-    </ul>
+    <div class="page-list-container">
+        <ul>
+            {% for entry in entries %}
+                <li><a href="{% url 'entry' entry %}">{{ entry }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

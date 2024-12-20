@@ -5,16 +5,29 @@
 {% endblock %}
 
 {% block body %}
-    <h3>Edit Page for <a href="{% url 'entry' entry_name %}">{{ entry_name }}</a></h3>
+    <h2 style="font-size: 34px;">Edit Page for <a href="{% url 'entry' entry_name %}">{{ entry_name }}</a></h2>
 
-    {% if message %}
-        <h4>{{ message }}</h4>
-    {% endif %}
-
-    <form method="POST">
-        {% csrf_token %}
-        <input type="text" id="create-page-title" name="title" value="{{ entry_name }}">
-        <textarea id="create-page-content" name="content">{{ markdown_source }}</textarea>
-        <input type="submit" value="save">
-    </form>
-{% endblock %}
+    
+    <div class="edit-page-grid">
+        <div class="grid-item">
+            <form class="edit-input-container" method="POST">
+                {% csrf_token %}
+                <h4>Title</h4>
+                <input type="text" class="create-page-title" name="title" value="{{ entry_name }}">
+                <h4>Content (In Markdown)</h4>
+                <textarea name="content">{{ markdown_source }}</textarea>
+                <div class="submit-botton-container">
+                    <input type="submit" class="submit-button" value="Save">
+                </div>
+            </form>
+        </div>
+        <div class="grid-item">
+            <h4 style="color: white;">empty</h4>
+            <p>Note: Make sure the title matches the title entered in the markdown!</p>
+            
+            {% if message %}
+                <h3 class="error-message">{{ message }}</h3>
+            {% endif %}
+        </div>
+    </div>
+    {% endblock %}

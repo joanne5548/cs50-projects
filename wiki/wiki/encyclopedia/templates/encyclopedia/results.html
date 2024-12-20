@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Results</h1>
+    <h1>Search results for "{{ search_query }}"</h1>
 
-    <div id="results-list-container">
+    <div class="results-list-container">
         {% for entry_name in search_results %}
-            <a href="{% url 'entry' entry_name %}">{{ entry_name }}</a>
+            <a class="search-result" href="{% url 'entry' entry_name %}">{{ entry_name }}</a>
             <div class="entry-description">
                 <p>Fill in preview of the entry page</p>
             </div>

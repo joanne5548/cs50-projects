@@ -7,15 +7,16 @@
 {% block body %}
     {% if error_message %}
         <div class="error-message-container">
-            <h3>Error :&#40;</h3>
-            <h4 class="error-message">{{ error_message }}</h4>
+            <h2 style="font-size: 34px;">Error :&#40;</h2>
+            <p class="error-message">{{ error_message }}</p>
+        </div>
+    {% else %}
+        <div class="edit-page-link-container">
+            <a href="{% url 'edit' entry_name %}">Edit Page</a>
+        </div>
+
+        <div class="entry-page-container">
+            {{ html |safe }}
         </div>
     {% endif %}
-    <div id="edit-page-link-container">
-        <a href="{% url 'edit' entry_name %}">Edit Page</a>
-    </div>
-
-    <div class="entry-page-container">
-        {{ html |safe }}
-    </div>
 {% endblock %}

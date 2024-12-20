@@ -1,5 +1,7 @@
 body {
+    height: 100%;
     margin: 0;
+    padding: 0;
     background-color: white;
     font-family: "Crimson+Text";
     font-weight: 525;
@@ -18,18 +20,14 @@ code {
     font-weight: 550;
 }
 
-textarea {
-    height: 90vh;
-    width: 80%;
-}
-
 .main {
     padding: 25px 35px 25px;
+    /* margin-left: 16.666667%; */
 }
 
 .search {
     width: 100%;
-    padding: 2px 4px 2px;
+    padding: 3px 5px 3px;
     border-style: solid;
     border-radius: 1px;
     border-width: 1px;
@@ -46,9 +44,11 @@ textarea {
 }
 
 .sidebar {
+    /* position: fixed; */
     background-color: #f0f0f0;
     height: 100vh;
     padding: 15px 20px 0px 34px;
+    box-sizing: border-box;
 }
 
 .sidebar h2 {
@@ -62,19 +62,30 @@ textarea {
 #sidebar-functionalities {
     display: flex;
     flex-direction: column;
+    padding-left: 2px;
     row-gap: 15px;
+    font-size: 18px;
 }
 
 .sidebar form {
     margin-bottom: 5px;
 }
 
-/* .main h1 {
-    margin-left: 15px;
-} */
+.page-list-container {
+    padding-top: 23px;
+    border-top: 1px solid #a3a3a3;
+}
 
-.main ul {
+.page-list-container ul {
+    padding-left: 18px;
     font-size: 19px;
+    list-style: none;
+}
+
+.page-list-container li {
+    margin-bottom: 5px;
+    text-indent: 8px;
+    list-style-type: "–";
 }
 
 .error-message-container {
@@ -85,9 +96,10 @@ textarea {
     margin-top: 20px;
 }
 
-#edit-page-link-container {
+.edit-page-link-container {
     text-align: right;
     margin-right: 20px;
+    font-size: 18px;
 }
 
 .entry-page-container {
@@ -95,16 +107,75 @@ textarea {
     margin-left: 0px;
 }
 
-.entry-page-container h1 {
+h1 {
+    font-weight: 600;
+    margin-left: 0px;
+    margin-bottom: 10px;
+}
+
+h2, h3, h4, h5, h6 {
     font-weight: 550;
     margin-left: 0px;
     margin-bottom: 10px;
 }
 
-.entry-page-container p {
+p {
     font-size: 19px;
+}
+
+.results-list-container {
+    margin-top: 18px;
+}
+
+.results-list-container .search-result {
+    font-size: 21px;
+    /* font-weight: 550; */
 }
 
 .entry-page-container ul {
     font-size: 19px;
+}
+
+.edit-page-grid {
+    display: grid;
+    column-gap: 15px;
+    grid-template-columns: 50% auto;
+    margin-top: 18px;
+}
+
+.edit-page-grid p {
+    padding-top: 4px;
+}
+
+.edit-page-grid .error-message {
+    padding-top: 33px;
+}
+
+.edit-input-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0px;
+}
+
+.create-page-title {
+    width: 100%;
+    padding: 3px 5px 3px;
+    margin-bottom: 13px;
+}
+
+textarea {
+    height: 60vh;
+    width: 100%;
+    padding: 2px 5px 2px;
+    margin-bottom: 13px;
+}
+
+.submit-botton-container {
+    display: flex;
+    justify-content: right;
+}
+
+.submit-button {
+    width: 15%;
+    margin-right: 0;
 }

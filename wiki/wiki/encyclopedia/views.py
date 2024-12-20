@@ -40,9 +40,10 @@ def results_view(request, query):
         if 'q' in request.POST:
             return handle_search(request)
     
-    query = query.lower()
-    search_results = [entry for entry in util.list_entries() if query in entry.lower()]
+    query_lower = query.lower()
+    search_results = [entry for entry in util.list_entries() if query_lower in entry.lower()]
     return render(request, "encyclopedia/results.html", {
+        "search_query": query,
         "search_results": search_results,
     })
 
@@ -54,7 +55,7 @@ def create_view(request):
             title = request.POST['title']
             if not title:
                 return render(request, "encyclopedia/create.html", {
-                        "message": "Please enter the title of the page."
+                        "message": "Error: Please enter the title of the page."
                     })
 
             content = request.POST['content']
@@ -81,7 +82,7 @@ def edit_view(request, entry_name):
                 return render(request, "encyclopedia/edit.html", {
                         "entry_name": entry_name,
                         "markdown_source": util.get_entry(entry_name),
-                        "message": "Please enter the title of the page."
+                        "message": "Error: Please enter the title of the page."
                     })
             print(request.POST['content'])
             write_markdown(title, request.POST['content'], entry_name)
