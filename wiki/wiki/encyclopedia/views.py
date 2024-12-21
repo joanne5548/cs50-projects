@@ -59,6 +59,7 @@ def create_view(request):
                     })
 
             content = request.POST['content']
+            print(content)
             
             search_results = entry_exists(title)
             if search_results:
@@ -84,6 +85,7 @@ def edit_view(request, entry_name):
                         "markdown_source": util.get_entry(entry_name),
                         "message": "Error: Please enter the title of the page."
                     })
+            
             print(request.POST['content'])
             write_markdown(title, request.POST['content'], entry_name)
             return redirect('entry', title)
@@ -118,4 +120,5 @@ def write_markdown(title, content, old_name=None):
         os.rename(old_directory, file_directory)
 
     with open(file_directory, "w") as new_page:
+        print(content)
         new_page.write(content)
