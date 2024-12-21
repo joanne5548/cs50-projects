@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User
+from .models import *
 
 
 def index(request):
@@ -61,3 +61,20 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
+
+def add(request):
+    if request.method == "POST":
+        if 'title' in request.POST:
+            title = request.POST['title']
+            description = request.POST['description']
+            starting_bid = request.POST['starting_bid']
+            img_url = request.POST['img_url']
+            
+            if img_url:
+                auction_item = Auction(title=title, description=description, starting_bid=starting_bid, img_url=img_url)
+            else:
+                auction_item = Auction(title=title, description=description, starting_bid=starting_bid)
+            auction_item.save()
+            print(auction_item)
+
+    return render(request, "auctions/add.html")

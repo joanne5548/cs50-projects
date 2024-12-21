@@ -1,7 +1,9 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Active Listings</h2>
-
+    <div class="grid-auction-list-heading">
+        <h2 class="grid-item">Active Listings</h2>
+        <a class="grid-item" href="{% url 'add' %}">Create New Auction</a>
+    </div>
     TODO
 {% endblock %}

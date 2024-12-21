@@ -1,3 +1,13 @@
 body {
     padding: 10px;
 }
+
+.grid-auction-list-heading {
+    display: grid;
+    grid-template-columns: 300px auto;
+}
+
+.grid-auction-list-heading a {
+    text-align: right;
+    padding-top: 13px;
+}
