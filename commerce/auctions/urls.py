@@ -8,5 +8,5 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path("register", views.register, name="register"),
     path("add", views.add, name="add"),
-    path("listings/<str:auction_title>", views.item_view, name="item"),
+    path("listings/<str:auction_id>", views.item_view, name="item"),
 ]

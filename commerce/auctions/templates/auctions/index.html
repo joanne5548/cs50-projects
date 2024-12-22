@@ -15,7 +15,7 @@
             </div>
             <div class="header">
                 <div class="name-container">
-                    <a class="name" href="{% url 'item' auction.title %}">{{ auction.title }}</a>
+                    <a class="name" href="{% url 'item' auction.id %}">{{ auction.title }}</a>
                 </div>
                 <div class="bid-container">
                     <p class="starting-bid">${{ auction.starting_bid }}</p>

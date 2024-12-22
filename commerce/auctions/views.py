@@ -89,7 +89,15 @@ def add(request):
         "form": NewAuctionForm()
     })
 
-def item_view(request, auction_title):
+def item_view(request, auction_id):
+    item = Auction.objects.get(pk=auction_id)
+    bids = Bid.objects.filter(pk=auction_id)
+
+    highest_bid = item.starting_bid
+    if bids:
+        highest_bid = max(highest_bid, max(bids))
+        
     return render(request, "auctions/item.html", {
-        "auction_name": auction_title,
+        "item": item,
+        "highest_bid": highest_bid,
     })
