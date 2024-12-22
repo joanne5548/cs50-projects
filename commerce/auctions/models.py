@@ -7,11 +7,14 @@ class User(AbstractUser):
         return f"{self.username}"
 
 class Auction(models.Model):
-    user = models.ForeignKey(User, models.CASCADE, related_name="auctioneer")
+    creater = models.ForeignKey(User, models.CASCADE, related_name="auctioneer")
     title = models.CharField(max_length=64)
     description = models.TextField()
     starting_bid = models.IntegerField()
     img_url = models.URLField(blank=True, default="https://i.imgur.com/cu6sM99.png")
+    active = models.BooleanField(default=True)
+    winner = models.ForeignKey(User, models.CASCADE, related_name="item_winner", blank=True, null=True)
+    closing_bid = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.title}"

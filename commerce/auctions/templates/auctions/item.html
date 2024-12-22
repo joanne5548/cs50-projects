@@ -3,22 +3,47 @@
 {% block body %}
     <div class="item-container">
         <img src="{{ item.img_url }}">
-        <div class="item-descriptions-container">
-            <h3>{{ item.title }}</h3>
-            <div class="bid-container">
-                <h4>Current Bid: ${{ highest_bid }}</h4>
-                <form method="POST">
-                    {% csrf_token %}
-                    {{ form }}
-                    <input type="submit" class="submit-button">
-                </form>
-
+        <div class="non-image-container">
+            <div class="descriptions-container">
+                <h3>{{ item.title }}</h3>
+    
+                {% if item.active and form %}
+                    <div class="bid-container">
+                        <h4>Current Bid: ${{ highest_bid }}</h4>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <p>Enter Bid: </p>
+                                <div class="form-field">{{ form.bid_amount }}</div>
+                                <div class="Form-field"><button type="submit" class="submit-button">Bid!</button></div>
+                            </form>
+                    </div>
+                {% else %}
+                    <h4>This Auction is CLOSED.</h4>
+                    {% if user.is_authenticated and user == item.winner %}
+                        <h4>You are the winner of this Auction!!! CONGRATS!!!</h4>
+                        <h4>U better give dat money (${{ item.closing_bid }}) to <strong>{{ item.creater }}</strong> user >:(</h4>
+                    {% else %}
+                        <h4>The winner is <strong>{{ item.winner }}</strong> with <strong>${{ item.closing_bid }}</strong>!!!! WOOHOO!!!!!</h4>
+                    {% endif %}
+                {% endif %}
+    
                 {% if message %}
                     <h5>{{ message }}</h5>
                 {% endif %}
-                
+    
+                <p>{{ item.description }}</p>
             </div>
-            <p>{{ item.description }}</p>
+    
+            {% if item.active and user.is_authenticated %}
+                {% if user == item.creater %}
+                    <div class="close-bid-button-container">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <button class="close-bid-button" type="submit" name="close_bid">Close Bid!!!!</button>
+                        </form>
+                    </div>
+                {% endif %}
+            {% endif %}
         </div>
     </div>
 

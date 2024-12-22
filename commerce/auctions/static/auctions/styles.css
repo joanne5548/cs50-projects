@@ -63,6 +63,20 @@ body {
     margin-bottom: 7px;
 }
 
+.auction-container .user-information {
+    display: grid;
+    grid-template-columns: 50% auto;
+}
+
+.user-information .winner-container {
+    display: flex;
+    justify-content: right;
+}
+
+.user-information .winner {
+    font-weight: bold;
+}
+
 .item-container {
     display: flex;
     height: 450px;
@@ -74,10 +88,30 @@ body {
     max-width: 100%
 }
 
-.item-container .item-descriptions-container {
+.item-container .non-image-container {
     flex: 1;
 }
 
-.item-container .bid-container {
-    display: inline;
+.item-container .descriptions-container {
+    height: 92%;
+}
+
+.bid-container form {
+    display: flex;
+    flex-direction: row;
+}
+
+.bid-container p {
+    font-weight: normal;
+    margin-right: 6px;
+}
+
+.bid-container .form-field {
+    margin-right: 6px;
+}
+
+.item-container .close-bid-button-container {
+    display: flex;
+    justify-content: right;
+    align-items: center;
 }
