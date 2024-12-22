@@ -13,6 +13,11 @@ class NewAuctionForm(forms.Form):
     starting_bid = forms.IntegerField(label="Starting Bid", min_value=1)
     img_url = forms.URLField(label="Image URL (Optional)", required=False)
 
+class NewBidForm(forms.Form):
+    def __init__(self, highest_bid, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['bid_amount'] = forms.IntegerField(label="New Bid", min_value=highest_bid)
+
 def index(request):
     auctions_list = Auction.objects.all()
     return render(request, "auctions/index.html", {
@@ -70,11 +75,12 @@ def register(request):
 
 def add(request):
     if request.method == "POST":
-        if 'title' in request.POST:
-            title = request.POST['title']
-            description = request.POST['description']
-            starting_bid = request.POST['starting_bid']
-            img_url = request.POST['img_url']
+        form = NewAuctionForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data["title"]
+            description = form.cleaned_data['description']
+            starting_bid = form.cleaned_data['starting_bid']
+            img_url = form.cleaned_data['img_url']
 
             user = request.user
             
@@ -84,20 +90,49 @@ def add(request):
                 auction_item = Auction(user=user, title=title, description=description, starting_bid=starting_bid)
             auction_item.save()
             print(auction_item)
+        else:
+            return render(request, "auctions/add.html", {
+                "form": form
+            })
 
     return render(request, "auctions/add.html", {
         "form": NewAuctionForm()
     })
 
+def get_highest_bid(starting_bid, auction_id):
+    # item = Auction.objects.get(pk=auction_id)
+    bids_amount_list = Bid.objects.filter(pk=auction_id).values_list('amount', flat=True)
+
+    highest_bid = starting_bid #item.starting_bid
+    if bids_amount_list:
+        highest_bid = max(highest_bid, max(bids_amount_list))
+    
+    return highest_bid
+
 def item_view(request, auction_id):
     item = Auction.objects.get(pk=auction_id)
-    bids = Bid.objects.filter(pk=auction_id)
+    highest_bid = get_highest_bid(item.starting_bid, auction_id)
 
-    highest_bid = item.starting_bid
-    if bids:
-        highest_bid = max(highest_bid, max(bids))
-        
+    if request.method == 'POST':
+        form = NewBidForm(highest_bid, request.POST)
+        if form.is_valid():
+            new_bid_amount = form.cleaned_data['bid_amount']
+            if new_bid_amount > highest_bid:
+                bid = Bid(user=request.user, item=item, amount=new_bid_amount)
+                bid.save()
+                highest_bid = new_bid_amount
+            else:
+                return render(request, "auctions/item.html", {
+                    "item": item,
+                    "highest_bid": highest_bid,
+                    "form": form,
+                    "message": "Please bid higher than the current bid."
+                })
+        # else:
+        #     print(form.errors)
+            
     return render(request, "auctions/item.html", {
         "item": item,
         "highest_bid": highest_bid,
+        "form": NewBidForm(highest_bid),
     })

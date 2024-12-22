@@ -23,7 +23,7 @@ class Bid(models.Model):
     amount = models.IntegerField()
 
     def __str__(self):
-        return f"Bid: ${self.amount} by {self.name}"
+        return f"Bid: ${self.amount} by {self.user}"
 
 class Comment(models.Model):
     user = models.ForeignKey(User, models.CASCADE, related_name="commenter")
@@ -32,4 +32,4 @@ class Comment(models.Model):
     time = models.TimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.name} commented at {self.time}:\n{self.comment}"
+        return f"{self.user} commented at {self.time}:\n{self.comment}"

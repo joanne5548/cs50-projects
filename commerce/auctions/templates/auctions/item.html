@@ -5,12 +5,24 @@
         <img src="{{ item.img_url }}">
         <div class="item-descriptions-container">
             <h3>{{ item.title }}</h3>
-            <h4>Current Bid: ${{ highest_bid }}</h4>
+            <div class="bid-container">
+                <h4>Current Bid: ${{ highest_bid }}</h4>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" class="submit-button">
+                </form>
+
+                {% if message %}
+                    <h5>{{ message }}</h5>
+                {% endif %}
+                
+            </div>
             <p>{{ item.description }}</p>
         </div>
     </div>
 
     <div class="comments-container">
-        
+         
     </div>
 {% endblock %}

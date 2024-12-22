@@ -65,14 +65,19 @@ body {
 
 .item-container {
     display: flex;
-    height: 600px;
+    height: 450px;
     border-bottom: 1px solid;
 }
 
 .item-container img {
-    flex: 0 0 500px;
+    flex: 0 0 450px;
+    max-width: 100%
 }
 
 .item-container .item-descriptions-container {
     flex: 1;
+}
+
+.item-container .bid-container {
+    display: inline;
 }
