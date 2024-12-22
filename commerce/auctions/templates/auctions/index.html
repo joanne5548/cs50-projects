@@ -2,8 +2,32 @@
 
 {% block body %}
     <div class="grid-auction-list-heading">
-        <h2 class="grid-item">Active Listings</h2>
-        <a class="grid-item" href="{% url 'add' %}">Create New Auction</a>
+        <h2>Active Listings</h2>
+        <div class="grid-item"><a href="{% url 'add' %}">Create New Auction</a></div>
     </div>
-    TODO
+
+<!-- Think about how to use bootstrap's column system to make this response design -->
+    {% for auction in auctions_list %}
+
+        <div class="auction-container">
+            <div class="image-container">
+                <img src="{{ auction.img_url }}">
+            </div>
+            <div class="header">
+                <div class="name-container">
+                    <a class="name" href="{% url 'item' auction.title %}">{{ auction.title }}</a>
+                </div>
+                <div class="bid-container">
+                    <p class="starting-bid">${{ auction.starting_bid }}</p>
+                </div>
+            </div>
+            <p class="username">{{ auction.user }}</p>
+            <p class="description">{{ auction.description }}</p>
+        </div>
+
+    {% empty %}
+
+        <h3 class="no-auctions">No Active Auctions.</h3>
+
+    {% endfor %}
 {% endblock %}

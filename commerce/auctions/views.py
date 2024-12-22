@@ -3,13 +3,21 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django import forms
 
 from .models import *
 
+class NewAuctionForm(forms.Form):
+    title = forms.CharField(label="Title")
+    description = forms.CharField(label="Description", widget=forms.Textarea)
+    starting_bid = forms.IntegerField(label="Starting Bid", min_value=1)
+    img_url = forms.URLField(label="Image URL (Optional)", required=False)
 
 def index(request):
-    return render(request, "auctions/index.html")
-
+    auctions_list = Auction.objects.all()
+    return render(request, "auctions/index.html", {
+        "auctions_list": auctions_list
+    })
 
 def login_view(request):
     if request.method == "POST":
@@ -30,11 +38,9 @@ def login_view(request):
     else:
         return render(request, "auctions/login.html")
 
-
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
-
 
 def register(request):
     if request.method == "POST":
@@ -69,12 +75,21 @@ def add(request):
             description = request.POST['description']
             starting_bid = request.POST['starting_bid']
             img_url = request.POST['img_url']
+
+            user = request.user
             
             if img_url:
-                auction_item = Auction(title=title, description=description, starting_bid=starting_bid, img_url=img_url)
+                auction_item = Auction(user=user, title=title, description=description, starting_bid=starting_bid, img_url=img_url)
             else:
-                auction_item = Auction(title=title, description=description, starting_bid=starting_bid)
+                auction_item = Auction(user=user, title=title, description=description, starting_bid=starting_bid)
             auction_item.save()
             print(auction_item)
 
-    return render(request, "auctions/add.html")
+    return render(request, "auctions/add.html", {
+        "form": NewAuctionForm()
+    })
+
+def item_view(request, auction_title):
+    return render(request, "auctions/item.html", {
+        "auction_name": auction_title,
+    })

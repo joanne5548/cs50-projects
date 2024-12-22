@@ -3,14 +3,15 @@ from django.db import models
     
 
 class User(AbstractUser):
-    pass
+    def __str__(self):
+        return f"{self.username}"
 
 class Auction(models.Model):
     user = models.ForeignKey(User, models.CASCADE, related_name="auctioneer")
     title = models.CharField(max_length=64)
     description = models.TextField()
     starting_bid = models.IntegerField()
-    img_url = models.URLField(blank=True)
+    img_url = models.URLField(blank=True, default="https://i.imgur.com/cu6sM99.png")
 
     def __str__(self):
         return f"{self.title}"

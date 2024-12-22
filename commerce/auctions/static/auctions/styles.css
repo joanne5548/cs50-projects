@@ -5,9 +5,60 @@ body {
 .grid-auction-list-heading {
     display: grid;
     grid-template-columns: 300px auto;
+    margin-bottom: 10px;
 }
 
-.grid-auction-list-heading a {
-    text-align: right;
-    padding-top: 13px;
+.grid-auction-list-heading .grid-item {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.auction-container {
+    border-style: solid;
+    border-color: rgb(124, 124, 124);
+    border-width: 1px;
+    border-radius: 1px;
+    padding: 10px;
+    width: 450px;
+    margin-bottom: 20px;
+}
+
+.auction-container .image-container {
+    text-align: center;
+}
+
+.auction-container img {
+    max-width: 300px;
+}
+
+.auction-container .header {
+    display: flex;
+}
+
+.auction-container .name-container {
+    flex: 0 0 375px;
+}
+
+.auction-container .name {
+    font-size: 20px;
+    font-weight: 5px;
+    font-style: normal;
+    color: black;
+}
+
+.auction-container .bid-container {
+    display: flex;
+    flex: 1;
+    justify-content: right;
+    align-items: center;
+}
+
+.bid-container p {
+    font-weight: bold;
+}
+
+.auction-container p {
+    margin-top: 3px;
+    margin-bottom: 7px;
 }
