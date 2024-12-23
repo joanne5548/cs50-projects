@@ -1,7 +1,9 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Closed Listings</h2>
+    <div class="grid-auction-list-heading">
+        <h2>Closed Listings</h2>
+    </div>
     {% for item in closed_items %}
         <div class="auction-container">
             <div class="image-container">

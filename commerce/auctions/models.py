@@ -11,7 +11,7 @@ class Auction(models.Model):
     title = models.CharField(max_length=64)
     description = models.TextField()
     starting_bid = models.IntegerField()
-    img_url = models.URLField(blank=True, default="https://i.imgur.com/cu6sM99.png")
+    img_url = models.URLField(blank=True, default="https://github.com/joanne5548/cs50-projects/blob/main/commerce/auctions/static/auctions/assets/default_image.png?raw=true")
     active = models.BooleanField(default=True)
     winner = models.ForeignKey(User, models.CASCADE, related_name="item_winner", blank=True, null=True)
     closing_bid = models.IntegerField(default=0)
@@ -30,9 +30,9 @@ class Bid(models.Model):
 
 class Comment(models.Model):
     user = models.ForeignKey(User, models.CASCADE, related_name="commenter")
-    comment = models.CharField(max_length=512)
+    content = models.CharField(max_length=512)
     item = models.ForeignKey(Auction, models.CASCADE, related_name="comment_item")
-    time = models.TimeField(auto_now_add=True)
+    time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user} commented at {self.time}:\n{self.comment}"
+        return f"{self.content}"

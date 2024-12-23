@@ -6,28 +6,25 @@
         <div class="grid-item"><a href="{% url 'add' %}">Create New Auction</a></div>
     </div>
 
-<!-- Think about how to use bootstrap's column system to make this response design -->
-    {% for auction in auctions_list %}
-
-        <div class="auction-container">
-            <div class="image-container">
-                <img src="{{ auction.img_url }}">
-            </div>
-            <div class="header">
-                <div class="name-container">
-                    <a class="name" href="{% url 'item' auction.id %}">{{ auction.title }}</a>
+    <div class="row">
+        {% for auction in auctions_list %}
+            <div class="auction-container col-lg-3 col-sm-3">
+                <div class="image-container">
+                    <img src="{{ auction.img_url }}">
                 </div>
-                <div class="bid-container">
-                    <p class="starting-bid">${{ auction.starting_bid }}</p>
+                <div class="header">
+                    <div class="name-container">
+                        <a class="name" href="{% url 'item' auction.id %}">{{ auction.title }}</a>
+                    </div>
+                    <div class="bid-container">
+                        <p class="starting-bid">${{ auction.starting_bid }}</p>
+                    </div>
                 </div>
+                <div class="username-container"><p class="username">{{ auction.creater }}</p></div>
+                <p class="description">{{ auction.description }}</p>
             </div>
-            <p class="username">{{ auction.creater }}</p>
-            <p class="description">{{ auction.description }}</p>
-        </div>
-
-    {% empty %}
-
-        <h3 class="no-auctions">No Active Auctions.</h3>
-
-    {% endfor %}
+        {% empty %}
+            <h3 class="no-auctions">No Active Auctions.</h3>
+        {% endfor %}
+    </div>
 {% endblock %}

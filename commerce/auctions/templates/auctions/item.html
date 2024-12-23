@@ -7,13 +7,13 @@
             <div class="descriptions-container">
                 <h3>{{ item.title }}</h3>
     
-                {% if item.active and form %}
+                {% if item.active and bid_form %}
                     <div class="bid-container">
                         <h4>Current Bid: ${{ highest_bid }}</h4>
                             <form method="POST">
                                 {% csrf_token %}
                                 <p>Enter Bid: </p>
-                                <div class="form-field">{{ form.bid_amount }}</div>
+                                <div class="form-field">{{ bid_form.bid_amount }}</div>
                                 <div class="Form-field"><button type="submit" class="submit-button">Bid!</button></div>
                             </form>
                     </div>
@@ -47,7 +47,30 @@
         </div>
     </div>
 
-    <div class="comments-container">
-         
+    <div class="comment-list-container">
+        <h3>Comments</h3>
+
+        <div class="comments-form-container">
+            <form method="POST">
+                {% csrf_token %}
+                <!-- <div class="header"><p>Comment: </p></div> -->
+                <div class="form-field">{{ comment_form.content }}</div>
+                <div class="button-container"><button type="submit" class="submit-button">Comment!</button></div>
+            </form>
+        </div>
+        
+        <div class="comments-list">
+            {% for comment in comments_list %}
+                <div class="comment-container">
+                    <div class="heading">
+                        <p class="name">{{ comment.user }}</p>
+                        <div class="time"><p>{{ comment.time }}</p></div>
+                    </div>
+                    <p class="comment">{{ comment.content }}</p>
+                </div>
+            {% empty %}
+                <p class="no-comment">No comments yet. Want to be the first? :o</p>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

@@ -1,11 +1,12 @@
 body {
-    padding: 10px;
+    padding: 15px 20px 15px;
 }
 
 .grid-auction-list-heading {
     display: grid;
     grid-template-columns: 300px auto;
     margin-bottom: 10px;
+    padding-left: 10px;
 }
 
 .grid-auction-list-heading .grid-item {
@@ -16,28 +17,31 @@ body {
 
 .auction-container {
     border-style: solid;
-    border-color: rgb(124, 124, 124);
-    border-width: 1px;
-    border-radius: 1px;
+    border-color: rgb(168, 168, 168);
+    border-width: 2px;
+    border-radius: 2px;
     padding: 10px;
-    width: 450px;
-    margin-bottom: 20px;
+    min-width: 360px;
+    max-width: 360px;
+    margin: 20px 30px 20px;
 }
 
 .auction-container .image-container {
     text-align: center;
+    margin: 10px 0px 20px;
 }
 
 .auction-container img {
-    max-width: 300px;
+    width: 300px;
 }
 
 .auction-container .header {
     display: flex;
+    max-width: 100%;
 }
 
 .auction-container .name-container {
-    flex: 0 0 375px;
+    flex: 0 0 275px;
 }
 
 .auction-container .name {
@@ -52,6 +56,15 @@ body {
     flex: 1;
     justify-content: right;
     align-items: center;
+}
+
+.auction-container .username-container {
+    display: flex;
+    justify-content: right;
+}
+
+.username-container p {
+    font-size: 15px;
 }
 
 .bid-container p {
@@ -90,10 +103,11 @@ body {
 
 .item-container .non-image-container {
     flex: 1;
+    padding-left: 15px;
 }
 
 .item-container .descriptions-container {
-    height: 92%;
+    height: 90%;
 }
 
 .bid-container form {
@@ -114,4 +128,90 @@ body {
     display: flex;
     justify-content: right;
     align-items: center;
+    padding-bottom: 14px;
+}
+
+.comment-list-container {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.comment-list-container h3 {
+    margin-top: 14px;
+    margin-bottom: 18px;
+}
+
+.comments-form-container {
+    height: 120px;
+}
+
+.comments-form-container form {
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+}
+
+.comments-form-container p {
+    margin-right: 6px;
+    font-size: 18px;
+    font-weight: 3px;
+}
+
+.comments-form-container .form-field {
+    margin-right: 6px;
+    width: 50%;
+}
+
+.comments-form-container textarea {
+    height: 100%;
+    width: 100%;
+}
+
+.comments-form-container .button-container {
+    display: flex;
+    align-items: end;
+}
+
+.comments-list {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.comments-list .no-comment {
+    font-size: 18px;
+    margin: 10px 0px 15px;
+    padding-left: 50px;
+    color: rgba(0, 0, 0, 0.692);
+}
+
+.comment-container {
+    width: 100%;
+    height: 150px;
+    border-style: solid;
+    border-radius: 3px;
+    border-width: 2px;
+    border-color: rgb(168, 168, 168);
+    padding: 10px 15px 10px;
+    margin-bottom: 15px;
+}
+
+.comment-container .heading {
+    display: flex;
+    flex-direction: row;
+}
+
+.comment-container .name {
+    flex: 0 0 200px;
+    margin-right: 10px;
+}
+
+.comment-container .time {
+    display: flex;
+    flex: 1;
+    justify-content: right;
+}
+
+.comment-container .comment {
+    padding-left: 20px;
 }

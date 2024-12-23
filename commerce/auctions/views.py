@@ -18,9 +18,17 @@ class NewBidForm(forms.Form):
         super().__init__(*args, **kwargs)
         self.fields['bid_amount'] = forms.IntegerField(label="New Bid", min_value=highest_bid)
 
+class NewCommentForm(forms.Form):
+    content = forms.CharField(label="Content", widget=forms.Textarea)
+
 def index(request):
     return render(request, "auctions/index.html", {
         "auctions_list": Auction.objects.filter(active=True)
+    })
+
+def closed(request):
+    return render(request, "auctions/closed.html", {
+        "closed_items": Auction.objects.filter(active=False)
     })
 
 def login_view(request):
@@ -108,47 +116,59 @@ def get_highest_bid(starting_bid, auction_id):
     
     return highest_bid
 
-def item_view(request, auction_id):
-    item = Auction.objects.get(pk=auction_id)
-    highest_bid = get_highest_bid(item.starting_bid, auction_id)
-    print(highest_bid)
-
-    if request.method == 'POST':
-        if 'close_bid' in request.POST:
-            item.active = False
-            item.winner = request.user
-            item.closing_bid = highest_bid
-            item.save()
-
+def handle_new_bid(item, highest_bid, request):
+    bid_form = NewBidForm(highest_bid, request.POST)
+    if bid_form.is_valid():
+        new_bid_amount = bid_form.cleaned_data['bid_amount']
+        if new_bid_amount > highest_bid:
+            bid = Bid(user=request.user, item=item, amount=new_bid_amount)
+            bid.save()
+            highest_bid = new_bid_amount
             return render(request, "auctions/item.html", {
                 "item": item,
-                "highest_bid": highest_bid
+                "highest_bid": highest_bid,
+                "bid_form": NewBidForm(highest_bid),
+                "comment_form": NewCommentForm(),
             })
-        else:
-            form = NewBidForm(highest_bid, request.POST)
-            if form.is_valid():
-                new_bid_amount = form.cleaned_data['bid_amount']
-                if new_bid_amount > highest_bid:
-                    bid = Bid(user=request.user, item=item, amount=new_bid_amount)
-                    bid.save()
-                    highest_bid = new_bid_amount
-                else:
-                    return render(request, "auctions/item.html", {
-                        "item": item,
-                        "highest_bid": highest_bid,
-                        "form": form,
-                        "message": "Please bid higher than the current bid."
-                    })
-        # else:
-        #     print(form.errors)
-            
+        
     return render(request, "auctions/item.html", {
         "item": item,
         "highest_bid": highest_bid,
-        "form": NewBidForm(highest_bid),
+        "bid_form": bid_form,
+        "message": "Please bid higher than the current bid."
     })
 
-def closed(request):
-    return render(request, "auctions/closed.html", {
-        "closed_items": Auction.objects.filter(active=False)
+def handle_close_bid(item, request, highest_bid):
+    item.active = False
+    item.winner = request.user
+    item.closing_bid = highest_bid
+    item.save()
+
+    return render(request, "auctions/item.html", {
+        "item": item,
+        "highest_bid": highest_bid
+    })
+
+def item_view(request, auction_id):
+    item = Auction.objects.get(pk=auction_id)
+    highest_bid = get_highest_bid(item.starting_bid, auction_id)
+
+    if request.method == 'POST':
+        if 'close_bid' in request.POST:
+            return handle_close_bid(item, request, highest_bid)
+        elif 'content' in request.POST:
+            comment_form = NewCommentForm(request.POST)
+            if comment_form.is_valid():
+                content = comment_form.cleaned_data['content']
+                comment = Comment(user=request.user, content=content, item=item)
+                comment.save()
+        else:
+            return handle_new_bid(item, highest_bid, request)
+
+    return render(request, "auctions/item.html", {
+        "item": item,
+        "highest_bid": highest_bid,
+        "bid_form": NewBidForm(highest_bid),
+        "comment_form": NewCommentForm(),
+        "comments_list": Comment.objects.filter(item=auction_id)
     })
