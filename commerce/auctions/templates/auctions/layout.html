@@ -8,15 +8,18 @@
         <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
     </head>
     <body>
-        <h1>Auctions</h1>
-        <div>
-            {% if user.is_authenticated %}
-                Signed in as <strong>{{ user.username }}</strong>.
-            {% else %}
-                Not signed in.
-            {% endif %}
+        <div class="layout-header">
+            <h1>Joanne's Auction Website</h1>
+            <div>
+                Login Status: 
+                {% if user.is_authenticated %}
+                    <strong>{{ user.username }}</strong>
+                {% else %}
+                    Not signed in.
+                {% endif %}
+            </div>
         </div>
-        <ul class="nav">
+        <ul class="tab nav">
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
             </li>

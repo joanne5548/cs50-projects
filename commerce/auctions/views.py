@@ -92,9 +92,9 @@ def add(request):
             user = request.user
             
             if img_url:
-                auction_item = Auction(creater=user, title=title, description=description, starting_bid=starting_bid, img_url=img_url)
+                auction_item = Auction(creater=user, title=title, description=description, highest_bid=starting_bid, img_url=img_url)
             else:
-                auction_item = Auction(creater=user, title=title, description=description, starting_bid=starting_bid)
+                auction_item = Auction(creater=user, title=title, description=description, highest_bid=starting_bid)
             auction_item.save()
 
             return redirect('item', auction_item.id)
@@ -107,14 +107,14 @@ def add(request):
         "form": NewAuctionForm()
     })
 
-def get_highest_bid(starting_bid, auction_id):
-    bids_amount_list = Bid.objects.filter(item=auction_id).values_list('amount', flat=True)
+# def get_highest_bid(current_highest_bid, auction_id):
+#     bids_amount_list = Bid.objects.filter(item=auction_id).values_list('amount', flat=True)
 
-    highest_bid = starting_bid
-    if bids_amount_list:
-        highest_bid = max(starting_bid, max(bids_amount_list))
+#     highest_bid = current_highest_bid
+#     if bids_amount_list:
+#         highest_bid = max(current_highest_bid, max(bids_amount_list))
     
-    return highest_bid
+#     return highest_bid
 
 def handle_new_bid(item, highest_bid, request):
     bid_form = NewBidForm(highest_bid, request.POST)
@@ -123,11 +123,12 @@ def handle_new_bid(item, highest_bid, request):
         if new_bid_amount > highest_bid:
             bid = Bid(user=request.user, item=item, amount=new_bid_amount)
             bid.save()
-            highest_bid = new_bid_amount
+            item.highest_bid = new_bid_amount
+            item.save()
             return render(request, "auctions/item.html", {
                 "item": item,
-                "highest_bid": highest_bid,
-                "bid_form": NewBidForm(highest_bid),
+                "highest_bid": new_bid_amount,
+                "bid_form": NewBidForm(new_bid_amount),
                 "comment_form": NewCommentForm(),
             })
         
@@ -138,24 +139,23 @@ def handle_new_bid(item, highest_bid, request):
         "message": "Please bid higher than the current bid."
     })
 
-def handle_close_bid(item, request, highest_bid):
+def handle_close_bid(item, request):
     item.active = False
     item.winner = request.user
-    item.closing_bid = highest_bid
     item.save()
 
     return render(request, "auctions/item.html", {
         "item": item,
-        "highest_bid": highest_bid
+        "highest_bid": item.highest_bid
     })
 
 def item_view(request, auction_id):
     item = Auction.objects.get(pk=auction_id)
-    highest_bid = get_highest_bid(item.starting_bid, auction_id)
+    highest_bid = item.highest_bid #get_highest_bid(item.highest_bid, auction_id)
 
     if request.method == 'POST':
         if 'close_bid' in request.POST:
-            return handle_close_bid(item, request, highest_bid)
+            return handle_close_bid(item, request)
         elif 'content' in request.POST:
             comment_form = NewCommentForm(request.POST)
             if comment_form.is_valid():
