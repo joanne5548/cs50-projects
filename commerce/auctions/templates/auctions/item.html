@@ -13,9 +13,9 @@
                             {% if user.is_authenticated %}
                                 <form method="POST">
                                     {% csrf_token %}
-                                    <p>Enter Bid: </p>
+                                    <div class="enter-bid">Enter Bid: </div>
                                     <div class="form-field">{{ bid_form.bid_amount }}</div>
-                                    <div class="Form-field"><button class="btn btn-warning" type="submit" class="submit-button">Bid</button></div>
+                                    <div class="Form-field"><button type="submit" class="button submit-button">Bid</button></div>
                                 </form>
                             {% else %}
                                 <h><strong>Note: </strong>Please log in to bid on items.</p>
@@ -43,7 +43,7 @@
                     <div class="close-bid-button-container">
                         <form method="POST">
                             {% csrf_token %}
-                            <button class="close-bid-button" type="submit" name="close_bid">Close Bid!!!!</button>
+                            <button class="button close-bid-button" type="submit" name="close_bid">Close Bid!!!!</button>
                         </form>
                     </div>
                 {% endif %}
@@ -58,7 +58,7 @@
             <form method="POST">
                 {% csrf_token %}
                 <div class="form-field">{{ comment_form.content }}</div>
-                <div class="button-container"><button type="submit" class="submit-button">Comment!</button></div>
+                <div class="button-container"><button type="submit" class="button submit-button">Comment!</button></div>
             </form>
         </div>
         

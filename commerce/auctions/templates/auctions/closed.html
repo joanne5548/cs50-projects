@@ -10,19 +10,21 @@
                 <div class="image-container">
                     <img src="{{ item.img_url }}">
                 </div>
-                <div class="header">
-                    <div class="name-container">
-                        <a class="name" href="{% url 'item' item.id %}">{{ item.title }}</a>
+                <div class="content">
+                    <div class="header">
+                        <div class="name-container">
+                            <a class="name" href="{% url 'item' item.id %}">{{ item.title }}</a>
+                        </div>
+                        <div class="bid-container">
+                            <p class="starting-bid">${{ item.highest_bid }}</p>
+                        </div>
                     </div>
-                    <div class="bid-container">
-                        <p class="starting-bid">${{ item.highest_bid }}</p>
+                    <div class="user-information">
+                        <p class="username">{{ item.creater }}</p>
+                        <div class="winner-container"><p class="winner">Sold to: {{ item.winner }}</p></div>
                     </div>
+                    <p class="description">{{ item.description }}</p>
                 </div>
-                <div class="user-information">
-                    <p class="username">{{ item.creater }}</p>
-                    <div class="winner-container"><p class="winner">Sold to: {{ item.winner }}</p></div>
-                </div>
-                <p class="description">{{ item.description }}</p>
             </div>
         {% empty %}
             <h3 class="no-auctions">No Closed Auctions.</h3>

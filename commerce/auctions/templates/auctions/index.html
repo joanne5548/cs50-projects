@@ -3,7 +3,7 @@
 {% block body %}
     <div class="grid-auction-list-heading">
         <h2>Active Listings</h2>
-        <div class="grid-item"><a href="{% url 'add' %}">Create New Auction</a></div>
+        <div class="grid-item"><a class="button" href="{% url 'add' %}">Create New Auction</a></div>
     </div>
 
     <div class="row">
@@ -12,16 +12,18 @@
                 <div class="image-container">
                     <img src="{{ auction.img_url }}">
                 </div>
-                <div class="header">
-                    <div class="name-container">
-                        <a class="name" href="{% url 'item' auction.id %}">{{ auction.title }}</a>
+                <div class="content">
+                    <div class="header">
+                        <div class="name-container">
+                            <a class="name" href="{% url 'item' auction.id %}">{{ auction.title }}</a>
+                        </div>
+                        <div class="bid-container">
+                            <p class="starting-bid">${{ auction.highest_bid }}</p>
+                        </div>
                     </div>
-                    <div class="bid-container">
-                        <p class="starting-bid">${{ auction.highest_bid }}</p>
-                    </div>
+                    <div class="username-container"><p class="username">{{ auction.creater }}</p></div>
+                    <p class="description">{{ auction.description }}</p>
                 </div>
-                <div class="username-container"><p class="username">{{ auction.creater }}</p></div>
-                <p class="description">{{ auction.description }}</p>
             </div>
         {% empty %}
             <h3 class="no-auctions">No Active Auctions.</h3>
