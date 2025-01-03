@@ -1,0 +1,20 @@
+.navbar {
+    display: grid;
+    grid-template-columns: 20rem auto;
+    padding: 1rem;
+    margin-left: 1.2rem;
+    margin-right: 1.2rem;
+    border-bottom: solid 1px black;
+    font-size: 22px;
+}
+
+.functionalities {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.login {
+    display: flex;
+    justify-content: right;
+}
