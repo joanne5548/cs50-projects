@@ -1,3 +1,13 @@
+@keyframes fade-out {
+    from {
+        color: black;
+    }
+
+    to {
+        color: white;
+    }
+}
+
 .todopage {
     display: flex;
     padding-right: 1rem;
@@ -44,6 +54,11 @@
 .item-list {
     display: flex;
     flex-direction: column;
+}
+
+.item-container-animate {
+    animation-name: fade-out;
+    animation-duration: 1s;
 }
 
 .checkbox {

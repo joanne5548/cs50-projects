@@ -13,6 +13,7 @@ const Todopage = () => {
             'second': false,
             'third': false,
         },
+        animate: false,
     })
     const newItemRef = useRef();
 
@@ -52,6 +53,7 @@ const Todopage = () => {
 
     function deleteItem(event) {
         let checkedList = state.checkedList;
+
         const itemName = event.target.name;
         if (checkedList.hasOwnProperty(itemName)) {
             delete checkedList[itemName]
@@ -61,9 +63,18 @@ const Todopage = () => {
 
         setState({
             ...state,
-            checkedList: checkedList,
-            itemList: newItemList
-        });
+            animate: true
+        })
+
+        setTimeout(() => {
+
+        }, 2000);
+
+        // setState({
+        //     ...state,
+        //     checkedList: checkedList,
+        //     itemList: newItemList
+        // });
     }
 
   return (
